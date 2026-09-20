@@ -3,6 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Restore the chosen theme before the first paint.
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem('mind-guard-theme') === 'dark' ? 'dark' : 'light';
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    </script>
     <meta name="description" content="Mind_Guard mental wellness check-in app" />
     <title>Mind_Guard</title>
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />

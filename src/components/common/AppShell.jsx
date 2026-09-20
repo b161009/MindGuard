@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { logout } from '../../services/firebase/auth';
 import { useAuth } from '../../hooks/useAuth';
@@ -9,11 +9,15 @@ const mobileActiveClass = ({ isActive }) => `mobile-nav-link${isActive ? ' mobil
 export default function AppShell({ children }) {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
-  const [darkMode, setDarkMode] = useState(() => localStorage.getItem('mind-guard-theme') === 'dark');
+  const [darkMode, setDarkMode] = useState(() => document.documentElement.dataset.theme === 'dark');
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.documentElement.dataset.theme = darkMode ? 'dark' : 'light';
-    localStorage.setItem('mind-guard-theme', darkMode ? 'dark' : 'light');
+    try {
+      localStorage.setItem('mind-guard-theme', darkMode ? 'dark' : 'light');
+    } catch {
+      // Theme switching still works when browser storage is unavailable.
+    }
   }, [darkMode]);
 
   const handleLogout = async () => {
