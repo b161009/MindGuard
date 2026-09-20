@@ -14,8 +14,8 @@ export default function DiaryInput({ value, onChange }) {
           resize: 'vertical',
           borderRadius: '12px',
           border: '1px solid rgba(148, 163, 184, 0.22)',
-          background: '#fff',
-          color: '#20332d',
+          background: 'var(--card)',
+          color: 'var(--ink)',
           padding: '0.9rem 1rem'
         }}
       />
