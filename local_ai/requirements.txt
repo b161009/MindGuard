@@ -1,0 +1,7 @@
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.30,<1.0
+torch>=2.6,<2.7
+transformers>=5.17,<5.18
+scikit-learn>=1.6,<1.7
+numpy>=2.2,<2.3
+py-vncorenlp>=0.1.4

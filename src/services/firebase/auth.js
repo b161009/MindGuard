@@ -7,6 +7,7 @@ import {
   EmailAuthProvider,
   reauthenticateWithCredential,
   deleteUser,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 
 import { auth } from "./config";
@@ -40,3 +41,5 @@ export const reauthenticateWithPassword = async (user, password) => {
 };
 
 export const deleteAuthUser = async (user) => deleteUser(user);
+
+export const requestPasswordReset = async (email) => sendPasswordResetEmail(auth, email);

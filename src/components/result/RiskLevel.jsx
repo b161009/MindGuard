@@ -1,4 +1,4 @@
-export default function RiskLevel({ level = 'Bình thường', score, urgent = false }) {
+export default function RiskLevel({ level = 'Bình thường', urgent = false }) {
   const palette = {
     'Bình thường': '#16815d',
     'Cần chú ý': '#b36b00',
@@ -9,7 +9,6 @@ export default function RiskLevel({ level = 'Bình thường', score, urgent = f
     <div className="panel" style={{ textAlign: 'center' }}>
       <p className="muted" style={{ margin: 0 }}>Mức độ cần chú ý hôm nay</p>
       <h2 style={{ margin: '0.75rem 0 0', color: palette[level] || '#64748b', fontSize: '2.1rem' }}>{level}</h2>
-      {typeof score === 'number' && <p className="score-caption">Chỉ số theo dõi: {score}/100</p>}
       {urgent && <p className="urgent-note">Bạn xứng đáng được một người thật sự lắng nghe ngay lúc này.</p>}
     </div>
   );

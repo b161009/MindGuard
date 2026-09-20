@@ -12,6 +12,8 @@
 - Phản hồi phù hợp tình huống, trang hỗ trợ khẩn và điểm truy cập Hỗ trợ luôn hiện trên giao diện.
 - Biểu đồ lịch sử, phân tích xu hướng 7/30 ngày; chỉ đưa ra nhận xét xu hướng khi đã có tối thiểu 3 check-in.
 - Đồng ý xử lý dữ liệu bắt buộc, đồng ý nghiên cứu tự nguyện tách riêng, trang minh bạch dữ liệu và luồng xoá tài khoản có xác thực lại.
+- Local AI API chạy trên máy, tắt mặc định; app tự quay về baseline nếu dịch vụ local không sẵn sàng.
+- PhoBERT local có pipeline train/evaluate riêng; chỉ được bật cho emotion sau khi checkpoint và kết quả test được duyệt.
 
 ## Dữ liệu check-in
 
@@ -36,8 +38,11 @@ Kiểm tra bản dựng:
 
 ```bash
 npm run build
+npm run test:unit
 ```
 
 ## Định hướng nghiên cứu tiếp theo
 
 Baseline hiện tại có chủ đích đơn giản và minh bạch để làm mốc so sánh. Thư mục [research](./research) đã có schema nhãn, hướng dẫn gán nhãn, dữ liệu giả lập và script kiểm tra JSONL. Bước nghiên cứu tiếp theo là xây dựng bộ dữ liệu tiếng Việt có nhãn (cảm xúc/tín hiệu), tách train–validation–test theo người dùng, huấn luyện mô hình local, rồi so sánh với baseline bằng Accuracy, Precision, Recall, F1-score và Confusion Matrix. Mọi mô hình vẫn cần giữ luồng hỗ trợ do con người quyết định khi có tín hiệu nguy hiểm.
+
+Xem [local_ai/README.md](./local_ai/README.md) để chạy Local AI service trên máy sau khi đã cài Python.

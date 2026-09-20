@@ -37,3 +37,4 @@ node research/scripts/validateDataset.mjs research/annotation_template.jsonl
 - `riskLevel`: 3 mức theo toàn bộ bản ghi (text + câu trả lời định lượng + xu hướng), báo cáo Accuracy, Macro-F1 và confusion matrix.
 
 Baseline để so sánh là luật hiện tại tại `src/services/ai/nlp.js` và `src/services/ai/riskScore.js`.
+Có thể chạy `local_ai/evaluate_baseline.py` để tạo báo cáo tự động cho tập test JSONL.

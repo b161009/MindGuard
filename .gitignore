@@ -5,3 +5,15 @@ dist/
 .env
 research/dataset/*
 !research/dataset/.gitkeep
+
+# Local Python runtime and generated caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Downloaded/trained model assets stay on this machine.
+# Keep evaluation results for reproducible research reporting.
+local_ai/models/**
+!local_ai/models/**/
+!local_ai/models/**/*metrics.json

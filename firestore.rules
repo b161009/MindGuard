@@ -2,14 +2,38 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    function validCheckIn(userId) {
+      return request.resource.data.userId == userId
+        && request.resource.data.dateKey is string
+        && request.resource.data.date is string
+        && request.resource.data.mood is number
+        && request.resource.data.comfort is number
+        && request.resource.data.stress is number
+        && request.resource.data.sleep is number
+        && request.resource.data.energy is number
+        && request.resource.data.interest is number
+        && request.resource.data.social is number
+        && request.resource.data.mood >= 0 && request.resource.data.mood <= 10
+        && request.resource.data.comfort >= 0 && request.resource.data.comfort <= 10
+        && request.resource.data.stress >= 0 && request.resource.data.stress <= 10
+        && request.resource.data.sleep >= 0 && request.resource.data.sleep <= 10
+        && request.resource.data.energy >= 0 && request.resource.data.energy <= 10
+        && request.resource.data.interest >= 0 && request.resource.data.interest <= 10
+        && request.resource.data.social >= 0 && request.resource.data.social <= 10
+        && request.resource.data.content is string
+        && request.resource.data.content.size() <= 4000;
+    }
+
     match /users/{userId} {
-      allow read, create, update, delete: if request.auth != null && request.auth.uid == userId;
+      allow read, create, update, delete: if isOwner(userId);
 
       match /checkins/{checkinId} {
-        allow read, delete: if request.auth != null && request.auth.uid == userId;
-        allow create, update: if request.auth != null
-          && request.auth.uid == userId
-          && request.resource.data.userId == userId;
+        allow read, delete: if isOwner(userId);
+        allow create, update: if isOwner(userId) && validCheckIn(userId);
       }
     }
   }

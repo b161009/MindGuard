@@ -43,26 +43,25 @@ export default function Result() {
         </div>
         {entry.needsHumanFollowUp && (
           <section className="human-support-alert" role="alert">
-            <div><strong>Điều bạn vừa chia sẻ rất quan trọng.</strong><p>Nếu bạn có thể làm hại bản thân hoặc không an toàn, hãy gọi 115/dịch vụ khẩn cấp địa phương hoặc đến gần một người bạn tin cậy ngay bây giờ.</p></div>
+            <div><strong>Điều bạn vừa chia sẻ rất quan trọng.</strong><p>Nếu bạn có thể làm hại bản thân hoặc không an toàn, hãy gọi 1900 1267 hoặc đến gần một người bạn tin cậy ngay bây giờ.</p></div>
             <Link to="/support"><Button>Nhận hỗ trợ ngay</Button></Link>
           </section>
         )}
         <div className="grid-3 result-stats">
-          <ResultCard title="Tâm trạng" value={`${entry.mood}/10`} hint="Dữ liệu bạn tự ghi nhận" />
-          <ResultCard title="Căng thẳng" value={`${entry.stress}/10`} hint="Dữ liệu bạn tự ghi nhận" />
-          <ResultCard title="Cảm xúc nổi bật" value={entry.emotion || 'chưa xác định'} hint="Từ nội dung bạn chia sẻ" />
+          <ResultCard title="Tâm trạng" value={`${entry.mood}/10`} />
+          <ResultCard title="Căng thẳng" value={`${entry.stress}/10`} />
+          <ResultCard title="Cảm xúc nổi bật" value={entry.emotion || 'Chưa xác định'} />
         </div>
         <div className="result-grid">
-          <RiskLevel level={entry.riskLevel} score={entry.riskScore} urgent={entry.needsHumanFollowUp} />
+          <RiskLevel level={entry.riskLevel} urgent={entry.needsHumanFollowUp} />
           <section className="panel feedback-panel">
             <p className="eyebrow">NHẬN XÉT NHẸ NHÀNG</p>
             <h2>{feedback.title || 'Kết quả đã được ghi nhận'}</h2>
             <p>{feedback.message || 'Check-in của bạn đã được lưu để theo dõi theo thời gian.'}</p>
           </section>
           <section className="panel">
-            <h2>Vì sao có mức này?</h2>
+            <h2>Điều hệ thống ghi nhận</h2>
             {reasons.length ? <ul className="reason-list">{reasons.map((reason) => <li key={reason}>{reason}</li>)}</ul> : <p className="muted">Các chỉ số hôm nay chưa có yếu tố nổi bật cần đưa vào giải thích.</p>}
-            <p className="small muted">Điểm số dựa trên các câu trả lời, nội dung tự nguyện chia sẻ và sẽ được nhìn cùng xu hướng nhiều ngày.</p>
           </section>
           <section className="panel">
             <h2>Bước nhỏ cho 24 giờ tới</h2>

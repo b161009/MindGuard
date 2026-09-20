@@ -1,0 +1,126 @@
+{
+  "split": "held-out test",
+  "threshold": 0.5,
+  "labels": [
+    "tích_cực",
+    "trung_tính",
+    "buồn",
+    "lo_lắng_căng_thẳng",
+    "tức_giận"
+  ],
+  "metrics": {
+    "macro_precision": 0.7682042008440823,
+    "macro_recall": 0.6606738018170752,
+    "macro_f1": 0.6957025502086651,
+    "micro_f1": 0.7677248677248677
+  },
+  "per_label": {
+    "tích_cực": {
+      "precision": 0.867334167709637,
+      "recall": 0.8289473684210527,
+      "f1": 0.8477064220183487
+    },
+    "trung_tính": {
+      "precision": 0.5789473684210527,
+      "recall": 0.5913978494623656,
+      "f1": 0.5851063829787234
+    },
+    "buồn": {
+      "precision": 0.6901709401709402,
+      "recall": 0.7582159624413145,
+      "f1": 0.7225950782997763
+    },
+    "lo_lắng_căng_thẳng": {
+      "precision": 0.9,
+      "recall": 0.41721854304635764,
+      "f1": 0.5701357466063348
+    },
+    "tức_giận": {
+      "precision": 0.8045685279187818,
+      "recall": 0.7075892857142857,
+      "f1": 0.7529691211401425
+    }
+  },
+  "confusion_matrices": {
+    "tích_cực": {
+      "labels": [
+        "absent",
+        "present"
+      ],
+      "matrix": [
+        [
+          769,
+          106
+        ],
+        [
+          143,
+          693
+        ]
+      ]
+    },
+    "trung_tính": {
+      "labels": [
+        "absent",
+        "present"
+      ],
+      "matrix": [
+        [
+          1578,
+          40
+        ],
+        [
+          38,
+          55
+        ]
+      ]
+    },
+    "buồn": {
+      "labels": [
+        "absent",
+        "present"
+      ],
+      "matrix": [
+        [
+          1140,
+          145
+        ],
+        [
+          103,
+          323
+        ]
+      ]
+    },
+    "lo_lắng_căng_thẳng": {
+      "labels": [
+        "absent",
+        "present"
+      ],
+      "matrix": [
+        [
+          1553,
+          7
+        ],
+        [
+          88,
+          63
+        ]
+      ]
+    },
+    "tức_giận": {
+      "labels": [
+        "absent",
+        "present"
+      ],
+      "matrix": [
+        [
+          1186,
+          77
+        ],
+        [
+          131,
+          317
+        ]
+      ]
+    }
+  }
+}

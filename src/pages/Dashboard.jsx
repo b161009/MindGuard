@@ -5,6 +5,7 @@ import Loading from '../components/common/Loading';
 import MoodChart from '../components/charts/MoodChart';
 import StressChart from '../components/charts/StressChart';
 import RiskChart from '../components/charts/RiskChart';
+import PillarsRadar from '../components/charts/PillarsRadar';
 import { useAuth } from '../hooks/useAuth';
 import { getCheckIns } from '../services/firebase/firestore';
 import { analyzeTrend } from '../services/ai/trendAnalysis';
@@ -40,9 +41,9 @@ export default function Dashboard() {
         ) : (
           <>
             <div className="summary-cards">
-              <article className="summary-card"><span>Tâm trạng gần nhất</span><strong>{latest.mood}<small>/10</small></strong><em>đã ghi nhận</em></article>
-              <article className="summary-card"><span>Căng thẳng gần nhất</span><strong>{latest.stress}<small>/10</small></strong><em>đã ghi nhận</em></article>
-              <article className="summary-card"><span>Mức cần chú ý</span><strong className="level-value">{latest.riskLevel}</strong><em>chỉ để theo dõi</em></article>
+              <article className="summary-card"><span>Tâm trạng gần nhất</span><strong>{latest.mood}<small>/10</small></strong></article>
+              <article className="summary-card"><span>Căng thẳng gần nhất</span><strong>{latest.stress}<small>/10</small></strong></article>
+              <article className="summary-card"><span>Mức cần chú ý</span><strong className="level-value">{latest.riskLevel}</strong></article>
             </div>
             <section className={`trend-callout ${trend.risingRisk || trend.sustained ? 'trend-callout-watch' : ''}`}>
               <span aria-hidden="true">⌁</span><div><strong>Góc nhìn 7 ngày</strong><p>{trend.summary}</p></div><Link to="/history">Xem chi tiết →</Link>
@@ -50,6 +51,7 @@ export default function Dashboard() {
           </>
         )}
         <div className="dashboard-charts">
+          <PillarsRadar entries={entries} />
           <MoodChart entries={entries} />
           <StressChart entries={entries} />
           <RiskChart entries={entries} />

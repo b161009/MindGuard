@@ -2,13 +2,15 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Button from '../common/Button';
 import Input from '../common/Input';
-import { login } from '../../services/firebase/auth';
+import { login, requestPasswordReset } from '../../services/firebase/auth';
 import { validateEmail } from '../../utils/validation';
 
 export default function LoginForm() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
+  const [notice, setNotice] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [resetting, setResetting] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -19,6 +21,7 @@ export default function LoginForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
+    setNotice('');
     if (!validateEmail(form.email) || !form.password) {
       setError('Hãy nhập email hợp lệ và mật khẩu của bạn.');
       return;
@@ -38,12 +41,38 @@ export default function LoginForm() {
     }
   };
 
+  const resetPassword = async () => {
+    setError('');
+    setNotice('');
+    if (!validateEmail(form.email)) {
+      setError('Nhập email của bạn trước khi yêu cầu đặt lại mật khẩu.');
+      return;
+    }
+    try {
+      setResetting(true);
+      await requestPasswordReset(form.email.trim());
+      setNotice('Nếu email này có tài khoản, bạn sẽ nhận được hướng dẫn đặt lại mật khẩu. Hãy kiểm tra cả thư mục spam.');
+    } catch (firebaseError) {
+      if (firebaseError.code === 'auth/user-not-found') {
+        setNotice('Nếu email này có tài khoản, bạn sẽ nhận được hướng dẫn đặt lại mật khẩu. Hãy kiểm tra cả thư mục spam.');
+      } else {
+        setError(firebaseError.code === 'auth/too-many-requests'
+          ? 'Bạn đã yêu cầu quá nhiều lần. Hãy chờ một lát rồi thử lại.'
+          : 'Chưa thể gửi email đặt lại mật khẩu. Hãy kiểm tra kết nối và thử lại.');
+      }
+    } finally {
+      setResetting(false);
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '1rem' }}>
       <Input label="Email" type="email" autoComplete="email" value={form.email} onChange={handleChange('email')} placeholder="ban@example.com" />
       <Input label="Mật khẩu" type="password" autoComplete="current-password" value={form.password} onChange={handleChange('password')} placeholder="••••••••" />
+      <button className="password-reset-link" type="button" onClick={resetPassword} disabled={submitting || resetting}>{resetting ? 'Đang gửi email…' : 'Quên mật khẩu?'}</button>
       {error && <p className="form-error" role="alert">{error}</p>}
-      <Button type="submit" disabled={submitting}>{submitting ? 'Đang đăng nhập…' : 'Đăng nhập'}</Button>
+      {notice && <p className="success-text" role="status">{notice}</p>}
+      <Button type="submit" disabled={submitting || resetting}>{submitting ? 'Đang đăng nhập…' : 'Đăng nhập'}</Button>
     </form>
   );
 }

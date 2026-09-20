@@ -5,7 +5,7 @@ export function generateFeedback(assessment) {
   if (needsHumanFollowUp) return {
     title: 'Bạn không cần ở một mình với điều này',
     message: 'Phần chia sẻ có tín hiệu cần được một con người quan tâm ngay. Hãy liên hệ người bạn tin cậy, chuyên gia, hoặc dịch vụ khẩn cấp tại nơi bạn đang ở nếu bạn thấy mình không an toàn.',
-    actions: ['Đến gần một người bạn tin cậy ngay bây giờ', 'Gọi 115 hoặc dịch vụ khẩn cấp tại địa phương nếu có nguy cơ tức thời', 'Mở trang Hỗ trợ để xem các bước an toàn ngắn'],
+    actions: ['Đến gần một người bạn tin cậy ngay bây giờ', 'Gọi 1900 1267 nếu có nguy cơ tức thời', 'Mở trang Hỗ trợ để xem các bước an toàn ngắn'],
   };
   if (level === RISK_LEVEL.SUPPORT) return {
     title: 'Có lẽ bạn nên tìm thêm sự hỗ trợ',
@@ -19,7 +19,7 @@ export function generateFeedback(assessment) {
   };
   return {
     title: 'Bạn đang duy trì một nhịp tương đối ổn',
-    message: 'Kết quả hôm nay là một lát cắt ngắn, không phải đánh giá sức khỏe. Hãy tiếp tục để ý những điều giúp bạn thấy dễ chịu.',
+    message: 'Hãy tiếp tục để ý những điều giúp bạn thấy dễ chịu và quay lại khi bạn muốn ghi nhận thêm.',
     actions: ['Giữ một thói quen nhỏ giúp bạn hồi phục', 'Ghi lại điều khiến hôm nay nhẹ nhàng hơn', 'Quay lại check-in vào ngày mai'],
   };
 }

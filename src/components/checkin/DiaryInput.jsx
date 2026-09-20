@@ -7,6 +7,7 @@ export default function DiaryInput({ value, onChange }) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
         rows={6}
+        maxLength={1000}
         placeholder="Ví dụ: Hôm nay mình thấy…"
         style={{
           width: '100%',
@@ -18,6 +19,7 @@ export default function DiaryInput({ value, onChange }) {
           padding: '0.9rem 1rem'
         }}
       />
+      <div className="diary-footer"><span>Riêng tư · Bạn có thể bỏ qua phần này.</span><span>{value.length}/1000</span></div>
     </div>
   );
 }

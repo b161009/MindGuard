@@ -8,13 +8,14 @@ export const RISK_LEVEL = {
 
 /** Transparent temporary screening score; it is not a clinical assessment. */
 export function calculateRiskScore(answers, textAnalysis = {}) {
-  const { mood, comfort, stress, sleep, energy, social } = answers;
+  const { mood, comfort, stress, sleep, energy, interest, social } = answers;
   const factors = [
     { key: 'stress', label: 'mức căng thẳng cao', points: Math.max(0, Number(stress) - 3) * 3.2, active: Number(stress) >= 7 },
     { key: 'mood', label: 'tâm trạng thấp', points: Math.max(0, 6 - Number(mood)) * 3.2, active: Number(mood) <= 3 },
     { key: 'comfort', label: 'mức dễ chịu thấp', points: Math.max(0, 6 - Number(comfort)) * 2, active: Number(comfort) <= 3 },
     { key: 'sleep', label: 'giấc ngủ chưa phục hồi', points: Math.max(0, 6 - Number(sleep)) * 2.5, active: Number(sleep) <= 3 },
     { key: 'energy', label: 'năng lượng thấp', points: Math.max(0, 6 - Number(energy)) * 2.5, active: Number(energy) <= 3 },
+    { key: 'interest', label: 'mức hứng thú với hoạt động hằng ngày thấp', points: Math.max(0, 6 - Number(interest ?? 5)) * 2, active: Number(interest ?? 5) <= 3 },
     { key: 'social', label: 'ít mong muốn kết nối', points: Math.max(0, 4 - Number(social)), active: Number(social) <= 2 },
   ];
   const quantitativeScore = factors.reduce((total, factor) => total + factor.points, 0);

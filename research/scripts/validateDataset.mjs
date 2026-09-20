@@ -13,8 +13,9 @@ for (const [index, line] of lines.entries()) {
     const missing = schema.requiredFields.filter((field) => row[field] === undefined);
     const badEmotion = !Array.isArray(row.emotion) || row.emotion.some((label) => !schema.emotion.includes(label));
     const badSignals = !Array.isArray(row.signals) || row.signals.some((label) => !schema.signals.includes(label));
-    const badRisk = !schema.riskLevel.includes(row.riskLevel);
-    if (missing.length || badEmotion || badSignals || badRisk) invalid.push({ line: index + 1, missing, badEmotion, badSignals, badRisk });
+    const badRisk = row.riskLevel !== undefined && !schema.riskLevel.includes(row.riskLevel);
+    const badSourceType = row.sourceType !== undefined && !schema.sourceTypes.includes(row.sourceType);
+    if (missing.length || badEmotion || badSignals || badRisk || badSourceType) invalid.push({ line: index + 1, missing, badEmotion, badSignals, badRisk, badSourceType });
   } catch (error) {
     invalid.push({ line: index + 1, error: error.message });
   }

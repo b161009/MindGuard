@@ -1,8 +1,44 @@
 {
-  "emotion": ["tích_cực", "trung_tính", "buồn", "lo_lắng_căng_thẳng", "mệt_mỏi", "tức_giận"],
-  "signals": ["none", "quá_tải", "cô_lập", "tuyệt_vọng", "an_toàn_khẩn_cấp"],
-  "riskLevel": ["Bình thường", "Cần chú ý", "Nên tìm hỗ trợ"],
-  "requiredFields": ["id", "text", "emotion", "signals", "riskLevel", "annotation"],
-  "optionalFields": ["quantitative", "sourceType", "split"],
-  "sourceTypes": ["synthetic", "consented_deidentified"]
+  "emotion": [
+    "tích_cực",
+    "trung_tính",
+    "buồn",
+    "lo_lắng_căng_thẳng",
+    "mệt_mỏi",
+    "tức_giận"
+  ],
+
+  "signals": [
+    "quá_tải",
+    "cô_lập",
+    "tuyệt_vọng",
+    "an_toàn_khẩn_cấp"
+  ],
+
+  "riskLevel": [
+    "Bình thường",
+    "Cần chú ý",
+    "Nên tìm hỗ trợ"
+  ],
+
+  "requiredFields": [
+    "id",
+    "text",
+    "emotion",
+    "signals",
+    "annotation"
+  ],
+
+  "optionalFields": [
+    "riskLevel",
+    "quantitative",
+    "sourceType",
+    "split"
+  ],
+
+  "sourceTypes": [
+    "synthetic",
+    "consented_deidentified",
+    "ViGoEmotions"
+  ]
 }

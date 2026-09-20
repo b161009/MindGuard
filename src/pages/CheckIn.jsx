@@ -5,12 +5,19 @@ import MoodSlider from '../components/checkin/MoodSlider';
 import DiaryInput from '../components/checkin/DiaryInput';
 import { useAuth } from '../hooks/useAuth';
 import { saveCheckIn } from '../services/firebase/firestore';
-import { analyzeText } from '../services/ai/nlp';
-import { calculateRiskScore } from '../services/ai/riskScore';
+import { analyzeCheckIn } from '../services/ai/localClient';
 import { generateFeedback } from '../services/feedback/feedbackGenerator';
 import { getDateKey } from '../utils/date';
 
-const initialForm = { mood: 6, comfort: 6, stress: 5, sleep: 6, energy: 6, social: 6, reflection: '' };
+const initialForm = { mood: 6, comfort: 6, stress: 5, sleep: 6, energy: 6, interest: 6, social: 6, reflection: '' };
+const questions = [
+  { field: 'mood', icon: '☼', label: 'Hôm nay, bạn cảm thấy vui vẻ và có tinh thần tốt đến mức nào?', lowLabel: 'Rất ít', highLabel: 'Rất nhiều' },
+  { field: 'comfort', icon: '⌁', label: 'Hôm nay, bạn cảm thấy bình tĩnh và thư thái đến mức nào?', lowLabel: 'Rất ít', highLabel: 'Rất nhiều' },
+  { field: 'energy', icon: '✦', label: 'Hôm nay, bạn cảm thấy hoạt bát và có năng lượng đến mức nào?', lowLabel: 'Rất ít', highLabel: 'Rất nhiều' },
+  { field: 'sleep', icon: '☾', label: 'Bạn thức dậy với cảm giác tươi tỉnh và được nghỉ ngơi đến mức nào?', lowLabel: 'Chưa hồi phục', highLabel: 'Rất hồi phục' },
+  { field: 'interest', icon: '✳', label: 'Các hoạt động hằng ngày có ý nghĩa hoặc khiến bạn hứng thú đến mức nào?', lowLabel: 'Rất ít', highLabel: 'Rất nhiều' },
+  { field: 'social', icon: '◌', label: 'Bạn mong muốn kết nối, trò chuyện với người khác đến mức nào?', lowLabel: 'Không muốn', highLabel: 'Rất muốn' },
+];
 
 export default function CheckIn() {
   const [form, setForm] = useState(initialForm);
@@ -25,8 +32,7 @@ export default function CheckIn() {
     setError('');
     try {
       setSubmitting(true);
-      const textAnalysis = analyzeText(form.reflection);
-      const assessment = calculateRiskScore(form, textAnalysis);
+      const { textAnalysis, assessment, source } = await analyzeCheckIn(form);
       const feedback = generateFeedback(assessment);
       const entry = {
         date: new Date().toISOString(),
@@ -36,6 +42,7 @@ export default function CheckIn() {
         stress: form.stress,
         sleep: form.sleep,
         energy: form.energy,
+        interest: form.interest,
         social: form.social,
         content: form.reflection.trim(),
         riskScore: assessment.score,
@@ -44,6 +51,7 @@ export default function CheckIn() {
         detectedSignals: textAnalysis.detectedSignals,
         explanation: { reasons: assessment.reasons, breakdown: assessment.breakdown },
         needsHumanFollowUp: assessment.needsHumanFollowUp,
+        analysisSource: source,
         feedback,
       };
       const savedEntry = await saveCheckIn(user.uid, entry);
@@ -61,19 +69,14 @@ export default function CheckIn() {
         <div className="page-intro">
           <span className="eyebrow">CHECK-IN HÔM NAY</span>
           <h1>Hôm nay bạn thế nào?</h1>
-          <p>Không có câu trả lời đúng. Hãy chọn mức gần với trải nghiệm của bạn nhất.</p>
+          <p>Không có câu trả lời đúng. Hãy chọn mức gần với trải nghiệm của bạn nhất hôm nay.</p>
         </div>
         <form className="checkin-form" onSubmit={handleSubmit}>
+          <div className="checkin-progress" aria-label="Tiến độ check-in"><span>6 câu hỏi</span><div><i /><i /><i /><i /><i /><i /></div><span>Khoảng 1 phút</span></div>
           <section className="question-group">
-            <MoodSlider label="Tâm trạng của bạn lúc này" value={form.mood} onChange={update('mood')} />
-            <MoodSlider label="Bạn cảm thấy dễ chịu, thư thái đến mức nào?" value={form.comfort} onChange={update('comfort')} />
-            <MoodSlider label="Mức độ căng thẳng của bạn" value={form.stress} onChange={update('stress')} />
+            {questions.map((question) => <MoodSlider key={question.field} id={`checkin-${question.field}`} {...question} value={form[question.field]} onChange={update(question.field)} />)}
           </section>
-          <section className="question-group">
-            <MoodSlider label="Giấc ngủ đêm qua giúp bạn hồi phục đến mức nào?" value={form.sleep} onChange={update('sleep')} />
-            <MoodSlider label="Năng lượng của bạn hôm nay" value={form.energy} onChange={update('energy')} />
-            <MoodSlider label="Bạn muốn giao tiếp, kết nối với người khác đến mức nào?" value={form.social} onChange={update('social')} />
-          </section>
+          <section className="context-question panel"><div><span className="checkin-icon" aria-hidden="true">≈</span><div><p className="eyebrow">CĂNG THẲNG</p><h3>Mức độ căng thẳng của bạn hôm nay</h3></div></div><MoodSlider id="checkin-stress" label="Mức căng thẳng" icon="≈" value={form.stress} onChange={update('stress')} lowLabel="Không căng thẳng" highLabel="Rất căng thẳng" /></section>
           <DiaryInput value={form.reflection} onChange={update('reflection')} />
           <aside className="privacy-note">
             <span aria-hidden="true">⌁</span>
