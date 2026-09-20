@@ -129,6 +129,10 @@ html[data-theme="dark"] input:-webkit-autofill { box-shadow: 0 0 0 1000px #20252
 .range-control input[type="range"] { background: linear-gradient(90deg, #29916a var(--range-progress), #e2eee7 var(--range-progress)) !important; }
 html[data-theme="dark"] .range-control input[type="range"] { background: linear-gradient(90deg, #5cbd93 var(--range-progress), #47524e var(--range-progress)) !important; }
 
+/* Keep result explanations readable on dark cards. */
+html[data-theme="dark"] .result-container :is(.muted, .result-intro p, .feedback-panel p:not(.eyebrow), .reason-list, .action-list) { color: #d1ddd6; }
+html[data-theme="dark"] .result-container .urgent-note { color: #ffb7c2; }
+
 /* Higher-contrast text, especially for the dark theme. */
 .eyebrow { color: #237154; }.inline-link { color: #176b4b; }.mood-key { color: #176c51; }.support-link { color: #985800; }
 html[data-theme="dark"] .eyebrow { color: #91d9b2; } html[data-theme="dark"] .inline-link, html[data-theme="dark"] .mood-key, html[data-theme="dark"] .nav-link-active { color: #9de2bd; } html[data-theme="dark"] .support-link { color: #f3ca76; } html[data-theme="dark"] .text-button { color: #c2cec8; } html[data-theme="dark"] .range-heading, html[data-theme="dark"] .range-heading output, html[data-theme="dark"] .range-ends b { color: #c7e9d5; } html[data-theme="dark"] .range-heading output small, html[data-theme="dark"] .range-ends, html[data-theme="dark"] .checkin-slider-copy p, html[data-theme="dark"] .page-intro p { color: #acbbb4; }
