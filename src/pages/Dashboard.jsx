@@ -9,6 +9,7 @@ import PillarsRadar from '../components/charts/PillarsRadar';
 import { useAuth } from '../hooks/useAuth';
 import { getCheckIns } from '../services/firebase/firestore';
 import { analyzeTrend } from '../services/ai/trendAnalysis';
+import { copyVariant } from '../utils/copyVariant';
 
 const shortName = (name, email) => (name || email?.split('@')[0] || 'bạn').split(' ')[0];
 
@@ -32,7 +33,7 @@ export default function Dashboard() {
     <main className="page">
       <div className="container">
         <div className="dashboard-heading">
-          <div><span className="eyebrow">KHÔNG GIAN CỦA BẠN</span><h1>Chào {shortName(user.displayName, user.email)}.</h1><p>Hôm nay dù thế nào, bạn cũng có thể dừng lại và dành một chút dịu dàng cho mình.</p></div>
+          <div><span className="eyebrow">KHÔNG GIAN CỦA BẠN</span><h1>Chào {shortName(user.displayName, user.email)}.</h1><p>{copyVariant('Hôm nay bạn muốn lắng nghe bản thân một chút không?', 'Hôm nay dù thế nào, bạn cũng có thể dừng lại và dành một chút dịu dàng cho mình.')}</p></div>
           <Link to="/checkin"><Button>Bắt đầu check-in</Button></Link>
         </div>
         {error && <p className="form-error" role="alert">{error}</p>}
@@ -55,7 +56,7 @@ export default function Dashboard() {
           <MoodChart entries={entries} />
           <StressChart entries={entries} />
           <RiskChart entries={entries} />
-          <section className="panel quick-panel"><p className="eyebrow">NHẮC NHỞ NHẸ</p><h2>Bạn không cần phải ổn ngay.</h2><p>Một lời nói khiến bạn buồn không quyết định giá trị của bạn. Nếu đang tủi thân, bạn có thể nghỉ một chút, uống nước hoặc tìm một người bạn tin cậy để trò chuyện khi sẵn sàng.</p><Link to="/support"><Button variant="secondary">Tìm người hỗ trợ</Button></Link></section>
+          <section className="panel quick-panel"><p className="eyebrow">NHẮC NHỞ NHẸ</p><h2>{copyVariant('Không cần hoàn hảo.', 'Bạn không cần phải ổn ngay.')}</h2><p>{copyVariant('Điều quan trọng là bạn có một nơi để nhận ra những thay đổi nhỏ trước khi chúng trở nên quá nặng nề.', 'Một lời nói khiến bạn buồn không quyết định giá trị của bạn. Nếu đang tủi thân, bạn có thể nghỉ một chút, uống nước hoặc tìm một người bạn tin cậy để trò chuyện khi sẵn sàng.')}</p><Link to="/support"><Button variant="secondary">{copyVariant('Xem các nguồn hỗ trợ', 'Tìm người hỗ trợ')}</Button></Link></section>
         </div>
       </div>
     </main>

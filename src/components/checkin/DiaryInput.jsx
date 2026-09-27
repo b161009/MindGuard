@@ -1,8 +1,10 @@
+import { copyVariant } from '../../utils/copyVariant';
+
 export default function DiaryInput({ value, onChange }) {
   return (
     <div className="panel" style={{ display: 'grid', gap: '0.75rem' }}>
-      <h3 style={{ margin: 0 }}>Có điều gì bạn đang giữ trong lòng không?</h3>
-      <p className="muted small" style={{ margin: 0 }}>Bạn có thể viết vài từ, kể một chút hoặc bỏ qua. Không cần viết thật hay hay giải thích mọi chuyện ngay lúc này.</p>
+      <h3 style={{ margin: 0 }}>{copyVariant('Bạn muốn chia sẻ thêm điều gì không?', 'Có điều gì bạn đang giữ trong lòng không?')}</h3>
+      <p className="muted small" style={{ margin: 0 }}>{copyVariant('Không bắt buộc. Bạn có thể viết về suy nghĩ, cảm xúc hoặc điều khiến hôm nay trở nên khó khăn.', 'Bạn có thể viết vài từ, kể một chút hoặc bỏ qua. Không cần viết thật hay hay giải thích mọi chuyện ngay lúc này.')}</p>
       <textarea
         value={value}
         onChange={(e) => onChange(e.target.value)}

@@ -3,8 +3,16 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../services/firebase/config';
 import { useAuth } from '../../hooks/useAuth';
 import HineMonPlayground from './HineMonPlayground';
+import { copyVariant } from '../../utils/copyVariant';
 
 const notes = [
+  'Hôm nay có thể bình thường, nhưng em thì luôn đặc biệt với anh 🌷',
+  'Gửi em một cái ôm thật lâu. Không cần lý do đâu 🫂',
+  'Nhớ uống nước nha, bông hoa nhỏ của anh 💧🌸',
+  'Hôm nay em đã cố gắng rồi. Nghỉ một chút cũng được mà ☁️',
+  'Nếu ngày hôm nay hơi xám, anh gửi em một chút màu hồng 🎀',
+  'Không cần lúc nào cũng vui. Anh vẫn thương em như vậy 💗',
+  'Một bó hoa không dịp gì cả, chỉ vì là em 💐',
   'Em không cần phải hết buồn ngay đâu. Anh gửi em một cái ôm, nếu em muốn 🫂',
   'Một lời trách không định nghĩa con người em. Em vẫn xứng đáng được đối xử dịu dàng 🌷',
   'Nếu thấy tủi thân, em cứ cho mình một khoảng nghỉ nhé. Chưa muốn kể cũng không sao ☁️',
@@ -93,7 +101,7 @@ export default function HineMonSurprise() {
           <button type="button" onClick={() => setGiftIndex((index) => (index + 1) % gifts.length)}>🎁 Mở quà bí mật</button>
         </div>
         {giftIndex >= 0 && <div className="hinemon-gift" role="status"><span aria-hidden="true">{gifts[giftIndex][0]}</span><p>{gifts[giftIndex][1]}</p></div>}
-        {hearts > 0 && <p role="status">{hearts >= 5 ? 'Gửi em thêm một chút ấm áp. Em không cần đáp lại gì đâu 🫂💕' : `Gửi em ${hearts} trái tim nhỏ 💗`}</p>}
+        {hearts > 0 && <p role="status">{hearts >= 5 ? copyVariant('Bắt được rồi nha, em cũng thương anh đúng không? 🤭💕', 'Gửi em thêm một chút ấm áp. Em không cần đáp lại gì đâu 🫂💕') : `Gửi em ${hearts} trái tim nhỏ 💗`}</p>}
         {active && <HineMonPlayground key={user.uid} />}
         <p className="hinemon-hint">Chạm trái tim thử nha · Nhấn đúp logo để mở lại</p>
         <p>Chạm bên ngoài để đóng</p>

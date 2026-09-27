@@ -6,6 +6,7 @@ import ResultCard from '../components/result/ResultCard';
 import RiskLevel from '../components/result/RiskLevel';
 import { useAuth } from '../hooks/useAuth';
 import { getCheckIns } from '../services/firebase/firestore';
+import { copyVariant } from '../utils/copyVariant';
 
 export default function Result() {
   const { state } = useLocation();
@@ -38,7 +39,7 @@ export default function Result() {
       <div className="container result-container">
         <div className="page-intro result-intro">
           <span className="eyebrow">KẾT QUẢ CHECK-IN</span>
-          <h1>Cảm ơn bạn đã lắng nghe chính mình.</h1>
+          <h1>{copyVariant('Cảm ơn bạn đã dành thời gian cho bản thân.', 'Cảm ơn bạn đã lắng nghe chính mình.')}</h1>
           <p>Đây là phản hồi để bạn quan sát hôm nay, không phải chẩn đoán sức khỏe.</p>
         </div>
         {entry.needsHumanFollowUp && (
@@ -64,7 +65,7 @@ export default function Result() {
             {reasons.length ? <ul className="reason-list">{reasons.map((reason) => <li key={reason}>{reason}</li>)}</ul> : <p className="muted">Các chỉ số hôm nay chưa có yếu tố nổi bật cần đưa vào giải thích.</p>}
           </section>
           <section className="panel">
-            <h2>Một việc nhỏ, nếu bạn thấy phù hợp</h2>
+            <h2>{copyVariant('Bước nhỏ cho 24 giờ tới', 'Một việc nhỏ, nếu bạn thấy phù hợp')}</h2>
             <ol className="action-list">{(feedback.actions || ['Quay lại check-in vào ngày mai']).map((action) => <li key={action}>{action}</li>)}</ol>
           </section>
         </div>
