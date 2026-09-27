@@ -9,8 +9,8 @@ export default function Landing() {
       <div className="container landing-hero">
         <section>
           <span className="eyebrow">MỘT KHOẢNG DỪNG NHỎ MỖI NGÀY</span>
-          <h1>Nhận ra những thay đổi trước khi chúng trở nên quá nặng nề.</h1>
-          <p>Mind Guard giúp bạn ghi lại tâm trạng, căng thẳng và điều bạn muốn chia sẻ — để nhìn thấy xu hướng của chính mình theo thời gian.</p>
+          <h1>Một khoảng nhỏ để bạn được là chính mình.</h1>
+          <p>Không cần phải vui ngay, cũng không cần tìm đủ lời để giải thích. Bạn có thể ghi lại cảm xúc hôm nay và cùng Mind Guard nhìn lại những thay đổi theo thời gian.</p>
           <div className="hero-actions">
             <Link to={user ? '/dashboard' : '/register'}><Button>{user ? 'Vào không gian của tôi' : 'Bắt đầu miễn phí'}</Button></Link>
             {!user && <Link to="/login"><Button variant="secondary">Đăng nhập</Button></Link>}

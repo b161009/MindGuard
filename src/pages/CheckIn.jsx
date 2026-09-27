@@ -11,12 +11,48 @@ import { getDateKey } from '../utils/date';
 
 const initialForm = { mood: 6, comfort: 6, stress: 5, sleep: 6, energy: 6, interest: 6, social: 6, reflection: '' };
 const questions = [
-  { field: 'mood', icon: '☼', label: 'Hôm nay, bạn cảm thấy vui vẻ và có tinh thần tốt đến mức nào?', lowLabel: 'Rất ít', highLabel: 'Rất nhiều' },
-  { field: 'comfort', icon: '⌁', label: 'Hôm nay, bạn cảm thấy bình tĩnh và thư thái đến mức nào?', lowLabel: 'Rất ít', highLabel: 'Rất nhiều' },
-  { field: 'energy', icon: '✦', label: 'Hôm nay, bạn cảm thấy hoạt bát và có năng lượng đến mức nào?', lowLabel: 'Rất ít', highLabel: 'Rất nhiều' },
-  { field: 'sleep', icon: '☾', label: 'Bạn thức dậy với cảm giác tươi tỉnh và được nghỉ ngơi đến mức nào?', lowLabel: 'Chưa hồi phục', highLabel: 'Rất hồi phục' },
-  { field: 'interest', icon: '✳', label: 'Các hoạt động hằng ngày có ý nghĩa hoặc khiến bạn hứng thú đến mức nào?', lowLabel: 'Rất ít', highLabel: 'Rất nhiều' },
-  { field: 'social', icon: '◌', label: 'Bạn mong muốn kết nối, trò chuyện với người khác đến mức nào?', lowLabel: 'Không muốn', highLabel: 'Rất muốn' },
+  {
+    field: 'mood',
+    icon: '☼',
+    label: 'Hôm nay bạn cảm thấy vui vẻ đến mức nào?',
+    lowLabel: 'Không thấy vui',
+    highLabel: 'Rất vui vẻ',
+  },
+  {
+    field: 'comfort',
+    icon: '⌁',
+    label: 'Hôm nay bạn cảm thấy thư giãn đến mức nào?',
+    lowLabel: 'Không thư giãn',
+    highLabel: 'Rất thư giãn',
+  },
+  {
+    field: 'energy',
+    icon: '✦',
+    label: 'Hôm nay bạn cảm thấy mình có bao nhiêu năng lượng?',
+    lowLabel: 'Cạn năng lượng',
+    highLabel: 'Tràn đầy năng lượng',
+  },
+  {
+    field: 'sleep',
+    icon: '☾',
+    label: 'Khi thức dậy hôm nay, bạn cảm thấy được nghỉ ngơi đầy đủ đến mức nào?',
+    lowLabel: 'Chưa nghỉ ngơi đủ',
+    highLabel: 'Hoàn toàn đủ',
+  },
+  {
+    field: 'interest',
+    icon: '✳',
+    label: 'Hôm nay bạn hứng thú với các hoạt động của mình đến mức nào?',
+    lowLabel: 'Không hứng thú',
+    highLabel: 'Rất hứng thú',
+  },
+  {
+    field: 'social',
+    icon: '◌',
+    label: 'Hôm nay bạn muốn trò chuyện với người khác đến mức nào?',
+    lowLabel: 'Không muốn lúc này',
+    highLabel: 'Rất muốn',
+  },
 ];
 
 export default function CheckIn() {
@@ -69,7 +105,7 @@ export default function CheckIn() {
         <div className="page-intro">
           <span className="eyebrow">CHECK-IN HÔM NAY</span>
           <h1>Hôm nay bạn thế nào?</h1>
-          <p>Không có câu trả lời đúng. Hãy chọn mức gần với trải nghiệm của bạn nhất hôm nay.</p>
+          <p>Bạn không cần chọn một con số đẹp. Cứ chọn mức gần với cảm giác của mình hôm nay, và dành thời gian theo nhịp của bạn.</p>
         </div>
         <form className="checkin-form" onSubmit={handleSubmit}>
           <div className="checkin-progress" aria-label="Tiến độ check-in"><span>6 câu hỏi</span><div><i /><i /><i /><i /><i /><i /></div><span>Khoảng 1 phút</span></div>

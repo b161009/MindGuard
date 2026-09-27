@@ -5,13 +5,13 @@ import { useAuth } from '../../hooks/useAuth';
 import HineMonPlayground from './HineMonPlayground';
 
 const notes = [
-  'Hôm nay có thể bình thường, nhưng em thì luôn đặc biệt với anh 🌷',
-  'Gửi em một cái ôm thật lâu. Không cần lý do đâu 🫂',
-  'Nhớ uống nước nha, bông hoa nhỏ của anh 💧🌸',
-  'Hôm nay em đã cố gắng rồi. Nghỉ một chút cũng được mà ☁️',
-  'Nếu ngày hôm nay hơi xám, anh gửi em một chút màu hồng 🎀',
-  'Không cần lúc nào cũng vui. Anh vẫn thương em như vậy 💗',
-  'Một bó hoa không dịp gì cả, chỉ vì là em 💐',
+  'Em không cần phải hết buồn ngay đâu. Anh gửi em một cái ôm, nếu em muốn 🫂',
+  'Một lời trách không định nghĩa con người em. Em vẫn xứng đáng được đối xử dịu dàng 🌷',
+  'Nếu thấy tủi thân, em cứ cho mình một khoảng nghỉ nhé. Chưa muốn kể cũng không sao ☁️',
+  'Em không phải làm anh vui lúc này. Cứ chăm sóc cảm giác của em trước nha 💗',
+  'Uống một ngụm nước, ngồi ở chỗ dễ chịu một chút. Từng việc nhỏ thôi cũng được 💧',
+  'Khi sẵn sàng, em có thể nhắn anh hoặc một người em tin cậy. Em được quyền tìm sự lắng nghe 💌',
+  'Mình chưa cần giải quyết hết mọi chuyện hôm nay. Anh thương em cả những lúc em buồn 💐',
 ];
 const gifts = [
   ['💐', 'Một bó hoa dành riêng cho em.'],
@@ -86,13 +86,14 @@ export default function HineMonSurprise() {
         <button className="hinemon-heart" type="button" onClick={() => setHearts((count) => count + 1)} aria-label="Nhận thêm một trái tim">♥</button>
         {open && hearts > 0 && <div key={hearts} className="hinemon-confetti" aria-hidden="true">{Array.from({ length: 9 }, (_, index) => <span key={index} style={{ '--i': index }}>{index % 2 ? '🌸' : '💗'}</span>)}</div>}
         <h2 id="hinemon-message">Anh yêu em💋💐</h2>
+        <p>Em không cần gồng lên ở đây. Buồn một chút cũng được, chưa muốn nói cũng được.</p>
         <p className="hinemon-note" aria-live="polite">{notes[noteIndex]}</p>
         <div className="hinemon-actions">
           <button type="button" onClick={() => setNoteIndex((index) => (index + 1) % notes.length)}>💬 Thêm lời nhắn</button>
           <button type="button" onClick={() => setGiftIndex((index) => (index + 1) % gifts.length)}>🎁 Mở quà bí mật</button>
         </div>
         {giftIndex >= 0 && <div className="hinemon-gift" role="status"><span aria-hidden="true">{gifts[giftIndex][0]}</span><p>{gifts[giftIndex][1]}</p></div>}
-        {hearts > 0 && <p role="status">{hearts >= 5 ? 'Bắt được rồi nha, em cũng thương anh đúng không? 🤭💕' : `Gửi em ${hearts} trái tim nhỏ 💗`}</p>}
+        {hearts > 0 && <p role="status">{hearts >= 5 ? 'Gửi em thêm một chút ấm áp. Em không cần đáp lại gì đâu 🫂💕' : `Gửi em ${hearts} trái tim nhỏ 💗`}</p>}
         {active && <HineMonPlayground key={user.uid} />}
         <p className="hinemon-hint">Chạm trái tim thử nha · Nhấn đúp logo để mở lại</p>
         <p>Chạm bên ngoài để đóng</p>

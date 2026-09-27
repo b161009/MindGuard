@@ -32,7 +32,7 @@ export default function Dashboard() {
     <main className="page">
       <div className="container">
         <div className="dashboard-heading">
-          <div><span className="eyebrow">KHÔNG GIAN CỦA BẠN</span><h1>Chào {shortName(user.displayName, user.email)}.</h1><p>Hôm nay bạn muốn lắng nghe bản thân một chút không?</p></div>
+          <div><span className="eyebrow">KHÔNG GIAN CỦA BẠN</span><h1>Chào {shortName(user.displayName, user.email)}.</h1><p>Hôm nay dù thế nào, bạn cũng có thể dừng lại và dành một chút dịu dàng cho mình.</p></div>
           <Link to="/checkin"><Button>Bắt đầu check-in</Button></Link>
         </div>
         {error && <p className="form-error" role="alert">{error}</p>}
@@ -55,7 +55,7 @@ export default function Dashboard() {
           <MoodChart entries={entries} />
           <StressChart entries={entries} />
           <RiskChart entries={entries} />
-          <section className="panel quick-panel"><p className="eyebrow">NHẮC NHỞ NHẸ</p><h2>Không cần hoàn hảo.</h2><p>Điều quan trọng là bạn có một nơi để nhận ra những thay đổi nhỏ trước khi chúng trở nên quá nặng nề.</p><Link to="/support"><Button variant="secondary">Xem các nguồn hỗ trợ</Button></Link></section>
+          <section className="panel quick-panel"><p className="eyebrow">NHẮC NHỞ NHẸ</p><h2>Bạn không cần phải ổn ngay.</h2><p>Một lời nói khiến bạn buồn không quyết định giá trị của bạn. Nếu đang tủi thân, bạn có thể nghỉ một chút, uống nước hoặc tìm một người bạn tin cậy để trò chuyện khi sẵn sàng.</p><Link to="/support"><Button variant="secondary">Tìm người hỗ trợ</Button></Link></section>
         </div>
       </div>
     </main>
