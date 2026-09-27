@@ -50,3 +50,17 @@ html[data-theme="dark"] .hinemon-actions button, html[data-theme="dark"] .hinemo
 @media (max-width: 760px) { .hinemon-gift-button { bottom: 78px; left: 12px; } }
 @media (max-width: 380px) { .hinemon-gift-button span { display: none; } }
 @media (prefers-reduced-motion: reduce) { .hinemon-confetti { display: none; } .hinemon-heart { transition: none; } }
+.hinemon-playground { margin-top: 20px; text-align: left; border-top: 1px solid #c46c9844; padding-top: 16px; }
+.hinemon-playground summary { cursor: pointer; padding: 10px 0; font-weight: 750; min-height: 44px; }
+.hinemon-playground summary:focus-visible { outline: 2px solid var(--mint-strong); outline-offset: 2px; }
+.hinemon-menu { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 12px 0; }
+.hinemon-menu button { min-height: 76px; padding: 9px 4px; border: 1px solid #e9b7cc; border-radius: 14px; background: #fff8fb; color: #86204f; font-size: .76rem; cursor: pointer; overflow-wrap: anywhere; }
+.hinemon-menu button > span:first-child { display: block; margin-bottom: 5px; font-size: 24px; }
+.hinemon-menu button[aria-pressed="true"] { border-color: #a62560; background: #ffd5e7; box-shadow: 0 0 0 1px #a62560; }
+.hinemon-mini { padding: 16px; background: #ffe0ed; border-radius: 18px; text-align: center; }
+html .hinemon-mini h3 { margin: 0 0 10px; font-size: 1rem; color: #86204f; }
+.hinemon-mini p { line-height: 1.65; }
+html[data-theme="dark"] .hinemon-menu button { background: #402d38; border-color: #80516a; color: #ffd0e4; }
+html[data-theme="dark"] .hinemon-menu button[aria-pressed="true"] { background: #633750; border-color: #ffadd1; box-shadow: 0 0 0 1px #ffadd1; }
+html[data-theme="dark"] .hinemon-mini { background: #513144; }
+html[data-theme="dark"] .hinemon-mini h3 { color: #ffd0e4; }

@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../services/firebase/config';
 import { useAuth } from '../../hooks/useAuth';
+import HineMonPlayground from './HineMonPlayground';
 
 const notes = [
   'Hôm nay có thể bình thường, nhưng em thì luôn đặc biệt với anh 🌷',
@@ -92,6 +93,7 @@ export default function HineMonSurprise() {
         </div>
         {giftIndex >= 0 && <div className="hinemon-gift" role="status"><span aria-hidden="true">{gifts[giftIndex][0]}</span><p>{gifts[giftIndex][1]}</p></div>}
         {hearts > 0 && <p role="status">{hearts >= 5 ? 'Bắt được rồi nha, em cũng thương anh đúng không? 🤭💕' : `Gửi em ${hearts} trái tim nhỏ 💗`}</p>}
+        {active && <HineMonPlayground key={user.uid} />}
         <p className="hinemon-hint">Chạm trái tim thử nha · Nhấn đúp logo để mở lại</p>
         <p>Chạm bên ngoài để đóng</p>
       </div>
