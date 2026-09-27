@@ -8,8 +8,8 @@ export default function HineMonSurprise() {
   const [profile, setProfile] = useState(null);
   const [dismissed, setDismissed] = useState(false);
   const dialog = useRef(null);
-  const name = profile?.uid === user?.uid ? profile.name : user?.displayName;
-  const active = Boolean(user && name?.trim().toLowerCase() === 'hinemon');
+  const name = user && profile?.uid === user.uid ? profile?.name : user?.displayName;
+  const active = Boolean(user && typeof name === 'string' && name.trim().toLowerCase() === 'hinemon');
   const open = active && !dismissed;
 
   useEffect(() => {
