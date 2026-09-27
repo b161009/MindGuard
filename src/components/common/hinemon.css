@@ -24,13 +24,29 @@ html[data-accent="rose"] .range-control input[type="range"]::-moz-range-thumb { 
 html[data-accent="rose"] .range-ticks i.is-active { background: var(--mint-strong); }
 html[data-accent="rose"] .radar-area { fill: #db699344; stroke: var(--mint-strong); }
 html[data-accent="rose"] .radar-point { fill: var(--mint-strong); }
-.hinemon-dialog { padding: 0; border: 0; border-radius: 28px; width: min(420px, calc(100% - 40px)); color: #8f2358; background: #fff0f7; box-shadow: 0 24px 90px #3d092b55; overflow: visible; }
+.hinemon-dialog { padding: 0; border: 0; border-radius: 28px; width: min(420px, calc(100% - 40px)); max-height: calc(100dvh - 40px); color: #8f2358; background: #fff0f7; box-shadow: 0 24px 90px #3d092b55; overflow: auto; }
 .hinemon-dialog::backdrop { background: #35152999; backdrop-filter: blur(5px); }
 .hinemon-message { position: relative; padding: 42px 22px 30px; text-align: center; }
-.hinemon-heart { display: block; font-size: 64px; color: #d13e82; }
+.hinemon-heart { display: block; margin: auto; padding: 0 18px; border: 0; background: transparent; cursor: pointer; font-size: 64px; color: #d13e82; transition: transform .2s; }
+.hinemon-heart:hover { transform: scale(1.12); }
 html .hinemon-dialog h2 { color: #8f2358; font-size: clamp(1.5rem, 5vw, 2rem); margin: 16px 0; }
 .hinemon-message p { color: #915470; font-size: .85rem; }
 .hinemon-close { position: absolute; right: 12px; top: 10px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: transparent; color: inherit; font-size: 26px; cursor: pointer; }
 html[data-theme="dark"] .hinemon-dialog { background: #392632; color: #ffc3dd; }
 html[data-theme="dark"] .hinemon-dialog h2 { color: #ffc3dd; }
 html[data-theme="dark"] .hinemon-message p { color: #dcb3c7; }
+.hinemon-gift-button { position: fixed; left: 18px; bottom: 22px; z-index: 6; display: flex; gap: 8px; align-items: center; min-height: 44px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 99px; color: var(--mint-strong); background: var(--card); box-shadow: 0 5px 20px #90224a22; cursor: pointer; font-weight: 700; }
+.hinemon-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.hinemon-actions button { padding: 11px 12px; min-height: 44px; border-radius: 14px; border: 1px solid #e9b7cc; background: #ffe0ed; color: #86204f; cursor: pointer; font-weight: 650; }
+.hinemon-note { min-height: 3em; line-height: 1.6; }
+.hinemon-gift { margin-top: 16px; padding: 14px; border-radius: 18px; background: #ffe0ed; }
+.hinemon-gift > span { font-size: 40px; }
+.hinemon-message .hinemon-hint { margin-top: 20px; font-size: .75rem; }
+.hinemon-confetti { position: absolute; top: 90px; left: 0; right: 0; pointer-events: none; }
+.hinemon-confetti span { position: absolute; left: calc(10% + var(--i) * 10%); animation: hinemon-float 1.4s both; animation-delay: calc(var(--i) * 35ms); }
+@keyframes hinemon-float { from { opacity: 1; transform: translateY(0) scale(.6); } to { opacity: 0; transform: translateY(-65px) scale(1.2); } }
+html[data-theme="dark"] .hinemon-actions button, html[data-theme="dark"] .hinemon-gift { background: #513144; color: #ffd0e4; border-color: #80516a; }
+.hinemon-dialog button:focus-visible, .hinemon-gift-button:focus-visible { outline: 3px solid var(--mint-strong); outline-offset: 3px; }
+@media (max-width: 760px) { .hinemon-gift-button { bottom: 78px; left: 12px; } }
+@media (max-width: 380px) { .hinemon-gift-button span { display: none; } }
+@media (prefers-reduced-motion: reduce) { .hinemon-confetti { display: none; } .hinemon-heart { transition: none; } }
