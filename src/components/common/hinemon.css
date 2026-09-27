@@ -1,0 +1,36 @@
+html[data-accent="rose"] {
+  --mint: #fce7f1;
+  --mint-strong: #b82f70;
+  --ink: #402535;
+  --line: #edd3df;
+}
+html[data-accent="rose"] body { background: #fff5f9; }
+html[data-theme="dark"][data-accent="rose"] {
+  --mint: #422c39;
+  --mint-strong: #f399bf;
+  --ink: #f8edf3;
+  --line: #59404e;
+  --card: #30242c;
+}
+html[data-theme="dark"][data-accent="rose"],
+html[data-theme="dark"][data-accent="rose"] body,
+html[data-theme="dark"][data-accent="rose"] #root { background: #21191f; }
+html[data-accent="rose"] .brand-mark { background: #bb3776; }
+html[data-accent="rose"] :is(.nav-link-active, .nav-link:hover, .mobile-nav-link-active, .inline-link, .eyebrow, .mood-key, .checkin-icon, .range-heading, .range-heading output, .range-ends b, .password-reset-link, .success-text, .pillar-legend span) { color: var(--mint-strong); }
+html[data-accent="rose"] :is(.nav-link-active, .nav-link:hover, .mobile-nav-link-active > span, .quick-panel, .feedback-panel, .first-checkin, .privacy-note, .data-note, .trend-callout:not(.trend-callout-watch), .trend-explanation:not(.trend-explanation-watch)) { background: var(--mint); border-color: var(--line); color: var(--ink); }
+html[data-accent="rose"] .range-control input[type="range"] { background: linear-gradient(90deg, var(--mint-strong) var(--range-progress), var(--line) var(--range-progress)) !important; }
+html[data-accent="rose"] .range-control input[type="range"]::-webkit-slider-thumb { background: var(--mint-strong); }
+html[data-accent="rose"] .range-control input[type="range"]::-moz-range-thumb { background: var(--mint-strong); }
+html[data-accent="rose"] .range-ticks i.is-active { background: var(--mint-strong); }
+html[data-accent="rose"] .radar-area { fill: #db699344; stroke: var(--mint-strong); }
+html[data-accent="rose"] .radar-point { fill: var(--mint-strong); }
+.hinemon-dialog { padding: 0; border: 0; border-radius: 28px; width: min(420px, calc(100% - 40px)); color: #8f2358; background: #fff0f7; box-shadow: 0 24px 90px #3d092b55; overflow: visible; }
+.hinemon-dialog::backdrop { background: #35152999; backdrop-filter: blur(5px); }
+.hinemon-message { position: relative; padding: 42px 22px 30px; text-align: center; }
+.hinemon-heart { display: block; font-size: 64px; color: #d13e82; }
+html .hinemon-dialog h2 { color: #8f2358; font-size: clamp(1.5rem, 5vw, 2rem); margin: 16px 0; }
+.hinemon-message p { color: #915470; font-size: .85rem; }
+.hinemon-close { position: absolute; right: 12px; top: 10px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: transparent; color: inherit; font-size: 26px; cursor: pointer; }
+html[data-theme="dark"] .hinemon-dialog { background: #392632; color: #ffc3dd; }
+html[data-theme="dark"] .hinemon-dialog h2 { color: #ffc3dd; }
+html[data-theme="dark"] .hinemon-message p { color: #dcb3c7; }

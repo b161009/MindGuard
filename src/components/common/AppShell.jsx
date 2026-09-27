@@ -2,6 +2,7 @@ import { useLayoutEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { logout } from '../../services/firebase/auth';
 import { useAuth } from '../../hooks/useAuth';
+import HineMonSurprise from './HineMonSurprise';
 
 const activeClass = ({ isActive }) => `nav-link${isActive ? ' nav-link-active' : ''}`;
 const mobileActiveClass = ({ isActive }) => `mobile-nav-link${isActive ? ' mobile-nav-link-active' : ''}`;
@@ -27,6 +28,7 @@ export default function AppShell({ children }) {
 
   return (
     <>
+      <HineMonSurprise />
       <header className="site-header">
         <Link className="brand" to={user ? '/dashboard' : '/'}>
           <span className="brand-mark" aria-hidden="true">M</span>
