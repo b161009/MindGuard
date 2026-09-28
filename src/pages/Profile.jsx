@@ -110,7 +110,7 @@ export default function Profile() {
 
       <section className="data-note"><h2>Mind Guard không chẩn đoán</h2><p>Mỗi check-in có thể lưu câu trả lời, nội dung tự nguyện chia sẻ, mức cần chú ý và phản hồi. Các kết quả chỉ hỗ trợ quan sát thay đổi; chúng không thể thay thế chuyên gia hoặc dịch vụ khẩn cấp.</p></section>
 
-      <section className="danger-zone"><div><p className="eyebrow">VÙNG NGUY HIỂM</p><h2>Xoá tài khoản và dữ liệu</h2><p>Thao tác này xoá hồ sơ, toàn bộ check-in đang lưu và tài khoản đăng nhập. Không thể khôi phục từ ứng dụng.</p></div><Button variant="secondary" onClick={() => { setDeleteOpen(true); setDeleteError(''); }}>Xoá tài khoản</Button></section>
+      <section className="danger-zone"><div><p className="eyebrow">Hỗ Trợ Xóa Dữ Liệu</p><h2>Xoá tài khoản và dữ liệu</h2><p>Thao tác này xoá hồ sơ, toàn bộ check-in đang lưu và tài khoản đăng nhập. Không thể khôi phục từ ứng dụng.</p></div><Button variant="secondary" onClick={() => { setDeleteOpen(true); setDeleteError(''); }}>Xoá tài khoản</Button></section>
 
       <Modal isOpen={deleteOpen} title="Xoá vĩnh viễn tài khoản" onClose={() => !deleting && setDeleteOpen(false)}>
         <form className="delete-form" onSubmit={deleteAccount}>

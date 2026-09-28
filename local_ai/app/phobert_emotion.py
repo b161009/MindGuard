@@ -1,9 +1,4 @@
-"""Local PhoBERT emotion inference.
 
-This module deliberately classifies emotion only. Safety signals and the
-human-support pathway remain rule-based until they have a separately reviewed
-and evaluated dataset.
-"""
 
 from __future__ import annotations
 
@@ -45,7 +40,7 @@ def _load_model() -> None:
 
 
 def predict_emotion(text: str) -> dict[str, Any] | None:
-    """Return a transparent local prediction or None when no checkpoint exists."""
+
     if not text or not text.strip():
         return None
     _load_model()

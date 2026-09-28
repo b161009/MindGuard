@@ -10,10 +10,7 @@ const isValidRemoteResult = (result) => result
   && result.assessment
   && typeof result.assessment.score === 'number';
 
-/**
- * Uses an on-device service only when explicitly enabled. The browser baseline
- * remains available so a local-service outage never blocks a check-in.
- */
+
 export async function analyzeCheckIn(form) {
   const textAnalysis = analyzeText(form.reflection);
   const assessment = calculateRiskScore(form, textAnalysis);
