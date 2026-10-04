@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from '../services/firebase/config';
 import Button from '../components/common/Button';
 import Loading from '../components/common/Loading';
 import MoodChart from '../components/charts/MoodChart';
@@ -10,6 +12,7 @@ import { useAuth } from '../hooks/useAuth';
 import { getCheckIns } from '../services/firebase/firestore';
 import { analyzeTrend } from '../services/ai/trendAnalysis';
 import { formatDate } from '../utils/date';
+import '../styles/diary.css';
 
 const averageText = (value) => value === null ? '—' : value.toFixed(1);
 
@@ -17,13 +20,29 @@ export default function History() {
   const { user } = useAuth();
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [period, setPeriod] = useState(7);
+  const [profile, setProfile] = useState(null);
+  const name = profile?.uid === user.uid ? profile.name : user.displayName;
+  const isHineMon = typeof name === 'string' && name.trim().toLowerCase() === 'hinemon';
   const trend = useMemo(() => analyzeTrend(entries), [entries]);
   const visibleEntries = entries.slice(0, period);
 
   useEffect(() => {
-    getCheckIns(user.uid, 30).then(setEntries).finally(() => setLoading(false));
+    let cancelled = false;
+    setEntries([]);
+    setLoading(true);
+    setError('');
+    getCheckIns(user.uid, 30).then((items) => {
+      if (!cancelled) setEntries(items);
+    }).catch(() => {
+      if (!cancelled) setError('Chưa thể tải nhật ký. Bạn hãy kiểm tra kết nối và tải lại trang nhé.');
+    }).finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
   }, [user.uid]);
+  useEffect(() => onSnapshot(doc(db, 'users', user.uid), (snapshot) => {
+    setProfile({ uid: user.uid, name: snapshot.data()?.displayName ?? user.displayName });
+  }, () => setProfile({ uid: user.uid, name: user.displayName })), [user.uid, user.displayName]);
   if (loading) return <Loading message="Đang đọc xu hướng của bạn…" />;
 
   return (
@@ -38,7 +57,13 @@ export default function History() {
         <section className={`trend-explanation ${trend.risingRisk || trend.sustained ? 'trend-explanation-watch' : ''}`}><strong>Nhận xét xu hướng</strong><p>{trend.summary}</p></section>
         <div className="history-charts"><PillarsRadar entries={visibleEntries} mode="average" /><MoodChart entries={visibleEntries} days={period} /><StressChart entries={visibleEntries} days={period} /><RiskChart entries={visibleEntries} days={period} /></div>
         <section className="panel entry-list-panel"><div className="list-heading"><div><p className="eyebrow">GẦN ĐÂY</p><h2>Những lần check-in của bạn</h2></div><Link to="/checkin"><Button variant="secondary">Check-in mới</Button></Link></div>
-          {!entries.length ? <div className="empty-list"><p>Bạn chưa có check-in nào để hiển thị.</p><Link to="/checkin"><Button>Bắt đầu ngay</Button></Link></div> : <div className="entry-list">{visibleEntries.map((entry) => <article className="entry-row" key={entry.id || entry.dateKey}><div><strong>{formatDate(entry.dateKey)}</strong><span>{entry.emotion ? `Cảm xúc nổi bật: ${entry.emotion}` : 'Không có nội dung bổ sung'}</span></div><div className="entry-metrics"><span>Tâm trạng <b>{entry.mood}/10</b></span><span>Căng thẳng <b>{entry.stress}/10</b></span><span className={`level-chip level-${entry.riskLevel?.replaceAll(' ', '-').toLowerCase()}`}>{entry.riskLevel}</span></div></article>)}</div>}
+          {error ? <p className="form-error" role="alert">{error}</p> : !entries.length ? <div className="empty-list"><p>Bạn chưa có check-in nào để hiển thị.</p><Link to="/checkin"><Button>Bắt đầu ngay</Button></Link></div> : <div className="entry-list">{visibleEntries.map((entry) => {
+            const summary = <><div><strong>{formatDate(entry.dateKey)}</strong><span>{entry.emotion ? `Cảm xúc nổi bật: ${entry.emotion}` : 'Không có nội dung bổ sung'}</span>{isHineMon && <span className="diary-toggle-label">Nhật ký · Nhấn để xem hoặc thu gọn</span>}</div><div className="entry-metrics"><span>Tâm trạng <b>{entry.mood}/10</b></span><span>Căng thẳng <b>{entry.stress}/10</b></span><span className={`level-chip level-${entry.riskLevel?.replaceAll(' ', '-').toLowerCase()}`}>{entry.riskLevel}</span></div></>;
+            return isHineMon ? <details className="diary-entry" key={`${user.uid}-${entry.id || entry.dateKey}`}>
+              <summary className="entry-row">{summary}</summary>
+              <div className="diary-content"><h3>Lời em chia sẻ hôm đó</h3><p>{typeof entry.content === 'string' && entry.content.trim() ? entry.content : 'vì mình quá thích cậu rồi phải làm sao phải làm sao'}</p></div>
+            </details> : <article className="entry-row" key={entry.id || entry.dateKey}>{summary}</article>;
+          })}</div>}
         </section>
       </div>
     </main>

@@ -1,0 +1,9 @@
+.diary-entry > summary { cursor: pointer; list-style: none; border-radius: 8px; }
+.diary-entry > summary::-webkit-details-marker { display: none; }
+.diary-entry > summary:hover { background: var(--mint); }
+.diary-entry > summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.diary-entry .diary-toggle-label { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.diary-content { margin: 0 0 16px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); color: var(--ink); }
+.diary-content h3 { margin: 0 0 10px; font-size: 1rem; color: var(--ink); }
+.diary-content p { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.8; }
+@media (max-width: 620px) { .diary-entry .entry-metrics { flex-wrap: wrap; } }
