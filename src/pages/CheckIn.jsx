@@ -106,7 +106,7 @@ export default function CheckIn() {
         <div className="page-intro">
           <span className="eyebrow">CHECK-IN HÔM NAY</span>
           <h1>Hôm nay bạn thế nào?</h1>
-          <p>{copyVariant('Không có câu trả lời đúng. Hãy chọn mức gần với trải nghiệm của bạn nhất hôm nay.', 'Bạn không cần chọn một con số đẹp. Cứ chọn mức gần với cảm giác của mình hôm nay, và dành thời gian theo nhịp của bạn.')}</p>
+          <p>{copyVariant( 'Hãy chọn mức gần với trải nghiệm của bạn nhất hôm nay.')}</p>
         </div>
         <form className="checkin-form" onSubmit={handleSubmit}>
           <div className="checkin-progress" aria-label="Tiến độ check-in"><span>6 câu hỏi</span><div><i /><i /><i /><i /><i /><i /></div><span>Khoảng 1 phút</span></div>
@@ -117,11 +117,11 @@ export default function CheckIn() {
           <DiaryInput value={form.reflection} onChange={update('reflection')} />
           <aside className="privacy-note">
             <span aria-hidden="true">⌁</span>
-            <p>Mind Guard chỉ hỗ trợ bạn quan sát thay đổi, không chẩn đoán. Nếu bạn thấy mình không an toàn, hãy mở nút <strong>Hỗ trợ</strong> ngay.</p>
+            <p>Mind Guard hỗ trợ bạn quan sát thay đổi. Nếu bạn thấy mình không an toàn, hãy nhấn nút <strong>Hỗ trợ</strong> ngay.</p>
           </aside>
           {error && <p className="form-error" role="alert">{error}</p>}
           <div className="submit-row">
-            <p className="muted small">Mất khoảng 1 phút · Bạn có thể cập nhật lại trong ngày.</p>
+            <p className="muted small">Mất khoảng 1 phút, Bạn có thể cập nhật lại trong ngày.</p>
             <Button type="submit" disabled={submitting}>{submitting ? 'Đang lưu…' : 'Hoàn thành check-in'}</Button>
           </div>
         </form>
