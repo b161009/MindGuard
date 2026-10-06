@@ -9,9 +9,9 @@ export default function Landing() {
     <main className="page landing-page">
       <div className="container landing-hero">
         <section>
-          <span className="eyebrow">MỘT KHOẢNG DỪNG NHỎ MỖI NGÀY</span>
+          <span className="eyebrow">MỘT NHỊP NGHỈ NHỎ MỖI NGÀY</span>
           <h1>{copyVariant('Nhận ra những thay đổi trước khi chúng trở nên quá nặng nề.', 'Một khoảng nhỏ để bạn được là chính mình.')}</h1>
-          <p>{copyVariant('Mind Guard giúp bạn ghi lại tâm trạng, căng thẳng và điều bạn muốn chia sẻ — để nhìn thấy xu hướng của chính mình theo thời gian.', 'Không cần phải vui ngay, cũng không cần tìm đủ lời để giải thích. Bạn có thể ghi lại cảm xúc hôm nay và cùng Mind Guard nhìn lại những thay đổi theo thời gian.')}</p>
+          <p>{copyVariant('Mind Guard giúp bạn ghi lại tâm trạng, căng thẳng và điều bạn muốn chia sẻ, để nhìn thấy xu hướng của chính mình theo thời gian.', 'Không cần phải vui ngay, cũng không cần tìm đủ lời để giải thích. Bạn có thể ghi lại cảm xúc hôm nay và cùng Mind Guard nhìn lại những thay đổi theo thời gian.')}</p>
           <div className="hero-actions">
             <Link to={user ? '/dashboard' : '/register'}><Button>{user ? 'Vào không gian của tôi' : 'Bắt đầu miễn phí'}</Button></Link>
             {!user && <Link to="/login"><Button variant="secondary">Đăng nhập</Button></Link>}
@@ -28,9 +28,9 @@ export default function Landing() {
         </section>
       </div>
       <div className="container landing-features">
-        <article><span>◌</span><h2>Chạm vào hiện tại</h2><p>Check-in nhanh với các câu hỏi đơn giản, không phán xét.</p></article>
-        <article><span>⌁</span><h2>Nhìn vào xu hướng</h2><p>Nhận ra thay đổi kéo dài, không vội kết luận từ một ngày khó khăn.</p></article>
-        <article><span>♥</span><h2>Kết nối đúng lúc</h2><p>Khi có tín hiệu đáng lo, ưu tiên con người và nguồn hỗ trợ phù hợp.</p></article>
+        <article><span>◌</span><h2>Chạm vào hiện tại</h2><p>Check-in nhanh với các câu hỏi đơn giản.</p></article>
+        <article><span>⌁</span><h2>Nhìn vào xu hướng</h2><p>Nhận ra thay đổi kéo dài.</p></article>
+        <article><span>♥</span><h2>Kết nối đúng lúc</h2><p>Khi có tín hiệu đáng lo.</p></article>
       </div>
     </main>
   );
