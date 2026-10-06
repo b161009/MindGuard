@@ -33,7 +33,7 @@ export default function Dashboard() {
     <main className="page">
       <div className="container">
         <div className="dashboard-heading">
-          <div><span className="eyebrow">KHÔNG GIAN CỦA BẠN</span><h1>Chào {shortName(user.displayName, user.email)}.</h1><p>{copyVariant('Hôm nay bạn muốn lắng nghe bản thân một chút không?', 'Hôm nay dù thế nào, bạn cũng có thể dừng lại và dành một chút dịu dàng cho mình.')}</p></div>
+          <div><span className="eyebrow">Nơi của riêng bạn</span><h1>Chào {shortName(user.displayName, user.email)}.</h1><p>{copyVariant('Hôm nay bạn muốn lắng nghe bản thân một chút không?', 'Hôm nay dù thế nào, bạn cũng có thể dừng lại và dành một chút dịu dàng cho mình.')}</p></div>
           <Link to="/checkin"><Button>Bắt đầu check-in</Button></Link>
         </div>
         {error && <p className="form-error" role="alert">{error}</p>}
