@@ -6,7 +6,7 @@ export default function Register() {
     <main className="page">
       <div className="container" style={{ maxWidth: '560px', paddingTop: '4rem' }}>
         <div className="panel" style={{ padding: '2rem' }}>
-          <h1 style={{ marginTop: 0 }}>Tạo không gian của bạn</h1>
+          <h1 style={{ marginTop: 0 }}>Nơi lắng nghe tâm hồn của bạn</h1>
           <p className="muted" style={{ marginBottom: '1.5rem' }}>Chỉ mất một phút để bắt đầu theo dõi những thay đổi nhỏ mỗi ngày.</p>
           <RegisterForm />
           <p className="muted" style={{ marginTop: '1rem' }}>
